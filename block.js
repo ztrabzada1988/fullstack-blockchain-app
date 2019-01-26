@@ -1,3 +1,5 @@
+const { GENESIS_DATA } = require('./config');
+
 class Block {
     constructor({ timestamp, lastHash, hash, data }) { // these 4 is what a block contains. When you wrap in {} the order wont matter
         this.timestamp = timestamp;
@@ -5,13 +7,10 @@ class Block {
         this.hash = hash;
         this.data = data;
     }
+
+    static genesis() { // static methods aren't called on instances of a class. They are utility functions within a class
+        return new this(GENESIS_DATA); // this is same as Block but in static func.
+    }
 }
 
-const block1 = new Block({
-    timestamp:'01/01/01', 
-    lastHash: 'foo-lastHash', 
-    hash: 'foo-hash', 
-    data: 'foo-data'
-}); // new instance of Block
-
-console.log(block1);
+module.exports = Block;
