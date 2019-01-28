@@ -8,9 +8,19 @@ class Block {
         this.data = data;
     }
 
+    // genesis is the first block of the blockchain
     static genesis() { // static methods aren't called on instances of a class. They are utility functions within a class
         return new this(GENESIS_DATA); // this is same as Block but in static func.
+    }
+
+    static mineBlock({ lastBlock, data }) {
+        return new this({
+            timestamp: Date.now(),
+            lastHash: lastBlock.hash,
+            data
+        });
     }
 }
 
 module.exports = Block;
+
