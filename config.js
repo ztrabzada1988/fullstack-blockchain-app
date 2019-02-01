@@ -1,9 +1,25 @@
+const MINE_RATE = 1000;
+const INITIAL_DIFFICULTY = 3;
 
 const GENESIS_DATA = { // genesis data is the first block of the blockchain so it could be dummy data
-    timestamp: 1,
-    lastHash: '-----',
-    hash: 'hash-one',
-    data: []
+  timestamp: 1,
+  lastHash: '-----',
+  hash: 'hash-one',
+  difficulty: INITIAL_DIFFICULTY,
+  nonce: 0,
+  data: []
 };
 
-module.exports = { GENESIS_DATA };
+const STARTING_BALANCE = 1000;
+
+const REWARD_INPUT = { address: '*authorized-reward*' };
+
+const MINING_REWARD = 50;
+
+module.exports = {
+  GENESIS_DATA,
+  MINE_RATE,
+  STARTING_BALANCE,
+  REWARD_INPUT,
+  MINING_REWARD
+};
