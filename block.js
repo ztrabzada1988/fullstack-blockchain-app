@@ -3,7 +3,7 @@ const { GENESIS_DATA, MINE_RATE } = require('../config');
 const { cryptoHash } = require('../util');
 
 class Block {
-  constructor({ timestamp, lastHash, hash, data, nonce, difficulty }) { // these 4 is what a block contains. When you wrap in {} the order wont matter
+  constructor({ timestamp, lastHash, hash, data, nonce, difficulty }) { // these are vars that a block contains. When you wrap in {} the order wont matter
     this.timestamp = timestamp;
     this.lastHash = lastHash;
     this.hash = hash;
