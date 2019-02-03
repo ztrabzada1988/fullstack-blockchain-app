@@ -1,12 +1,13 @@
-const EC = require('elliptic').ec;
-const cryptoHash = require('./crypto-hash');
+const express = require('express');
+const Blockchain = require('./blockchain');
 
-const ec = new EC('secp256k1');
+const app = express();
+const blockchain = new Blockchain();
 
-const verifySignature = ({ publicKey, data, signature }) => {
-  const keyFromPublic = ec.keyFromPublic(publicKey, 'hex');
+app.get('/api/blocks', (req, res) => { // read data from the backend .get is from express
+    res.json(blockchain.chain); // this will send the blockchain.chain to whoever makes the get request with /api/blocks endpoint
+}); 
 
-  return keyFromPublic.verify(cryptoHash(data), signature);
-};
 
-module.exports = { ec, verifySignature, cryptoHash };
+const PORT = 3000;
+app.listen(PORT, () => console.log(`listening at localhost: ${PORT}`));
