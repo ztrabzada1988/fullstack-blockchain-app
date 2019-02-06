@@ -1,7 +1,7 @@
-const EC = require('elliptic').ec;
+const EC = require('elliptic').ec; // Eleptic Curve cryptography
 const cryptoHash = require('./crypto-hash');
 
-const ec = new EC('secp256k1');
+const ec = new EC('secp256k1'); // bitcoin eliptic based algorithm
 
 const verifySignature = ({ publicKey, data, signature }) => {
   const keyFromPublic = ec.keyFromPublic(publicKey, 'hex');
