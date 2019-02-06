@@ -39,7 +39,42 @@ class PubSub {
     });
   }
 
-  
+  subscribeToChannels() {
+    this.pubnub.subscribe({
+      channels: [Object.values(CHANNELS)]
+    });
+  }
+
+  listener() {
+    return {
+      message: messageObject => {
+        const { channel, message } = messageObject;
+
+        console.log(`Message received. Channel: ${channel}. Message: ${message}`);
+        const parsedMessage = JSON.parse(message);
+
+        switch(channel) {
+          case CHANNELS.BLOCKCHAIN:
+            this.blockchain.replaceChain(parsedMessage, true, () => {
+              this.transactionPool.clearBlockchainTransactions(
+                { chain: parsedMessage.chain }
+              );
+            });
+            break;
+          case CHANNELS.TRANSACTION:
+            if (!this.transactionPool.existingTransaction({
+              inputAddress: this.wallet.publicKey
+            })) {
+              this.transactionPool.setTransaction(parsedMessage);
+            }
+            break;
+          default:
+            return;
+        }
+      }
+    }
+  }
+
 }
 
 module.exports = PubSub;
