@@ -3,7 +3,7 @@ const { GENESIS_DATA, MINE_RATE } = require('../config');
 const { cryptoHash } = require('../util');
 
 class Block {
-  constructor({ timestamp, lastHash, hash, data, nonce, difficulty }) { // these are vars that a block contains. When you wrap in {} the order wont matter
+  constructor({ timestamp, lastHash, hash, data, nonce, difficulty }) {
     this.timestamp = timestamp;
     this.lastHash = lastHash;
     this.hash = hash;
@@ -12,9 +12,8 @@ class Block {
     this.difficulty = difficulty;
   }
 
-  // genesis is the first block of the blockchain
-  static genesis() { // static methods aren't called on instances of a class. They are utility functions within a class
-    return new this(GENESIS_DATA); // this is same as Block but in static func.
+  static genesis() {
+    return new this(GENESIS_DATA);
   }
 
   static mineBlock({ lastBlock, data }) {
@@ -45,5 +44,3 @@ class Block {
 }
 
 module.exports = Block;
-
-
