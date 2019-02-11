@@ -120,7 +120,7 @@ app.get('/api/known-addresses', (req, res) => {
   res.json(Object.keys(addressMap));
 });
 
-app.get('*', (req, res) => {
+app.get('*', (req, res) => { 
   res.sendFile(path.join(__dirname, 'client/dist/index.html'));
 });
 
